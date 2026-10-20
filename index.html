@@ -443,6 +443,14 @@ table.tbl{width:100%;border-collapse:collapse;font-size:15px}
 .slotc,.qrow,.pc,.ghost{user-select:none;-webkit-user-select:none}
 
 </style>
+<meta name="theme-color" content="#090e1b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="GridIron Fantasy Football">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="./app-icon.svg">
+<meta name="app-release" content="2026-10-20-pwa-1">
+<style id="pwa-styles">#app-update-banner{position:fixed;z-index:2147483646;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));background:#172238;color:white;border:1px solid #5a718e;border-radius:14px;padding:12px 16px;display:none;align-items:center;justify-content:space-between;gap:12px;font:600 14px system-ui,sans-serif;box-shadow:0 8px 24px #0005}#app-update-banner button{background:#fff;color:#172238;border:0;border-radius:9px;padding:10px 14px;font:700 14px system-ui;min-height:40px}@media(max-width:360px){#app-update-banner{left:6px;right:6px;padding:10px}}</style>
 </head>
 <body>
 <div id="app">
@@ -1360,6 +1368,18 @@ applyTheme();
 { const m = /join=([A-Za-z0-9]{6})/.exec(location.hash || ""); if (m) { S.home = "join"; S.form.join = m[1].toUpperCase(); } }
 render();
 
+})();
+</script>
+
+<div id="app-update-banner" role="status" aria-live="polite"><span>Update available 🚀</span><button id="app-refresh" type="button">Refresh</button></div>
+<script>
+(function(){
+  var release=document.querySelector('meta[name="app-release"]').content;
+  var banner=document.getElementById("app-update-banner");
+  document.getElementById("app-refresh").addEventListener("click",function(){location.reload();});
+  function check(){if(document.hidden)return;fetch("./index.html?app_version_check="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():"";}).then(function(s){var m=s.match(/<meta name="app-release" content="([^"]+)"/);if(m&&m[1]!==release)banner.style.display="flex";}).catch(function(){});}
+  setInterval(check,120000);document.addEventListener("visibilitychange",function(){if(!document.hidden)check();});window.addEventListener("focus",check);
+  if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("./sw.js").catch(function(){});});}
 })();
 </script>
 </body>
