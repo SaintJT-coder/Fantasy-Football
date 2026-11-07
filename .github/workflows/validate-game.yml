@@ -1,0 +1,24 @@
+name: Validate GridIron Fantasy
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax checks
+        run: |
+          node --check engine.js
+          node --check engine_test.js
+      - name: Exercise draft, scoring, and league engine
+        run: node engine_test.js
