@@ -1,6 +1,6 @@
-/* GridIron engine tests. Run with:  node tests/engine.test.js   (Node 18+, no installs needed) */
+/* GridIron engine tests. Run with:  node engine_test.js   (Node 18+, no installs needed) */
 const assert = require("assert");
-const GI = require("../engine.js");
+const GI = require("./engine.js");
 let pass = 0, fail = 0;
 const test = (name, fn) => { try { fn(); pass++; console.log("  ok   " + name); } catch (e) { fail++; console.log("  FAIL " + name + "\n       " + e.message); } };
 const mk = (o) => { const l = GI.newLeague(Object.assign({ code: "TEST01", name: "T", size: 10, uid: "me", owner: "Me", format: "ppr", type: "h2h" }, o)); return l; };
