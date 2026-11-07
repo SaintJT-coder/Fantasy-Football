@@ -8,7 +8,7 @@ A single-page fantasy football app. No build step. Host it on GitHub Pages.
 | `index.html` | The app: UI, styles, screens |
 | `engine.js` | Player data, scoring, draft rules, season sim, trades, QR codes. **Required.** |
 | `.nojekyll` | Tells GitHub Pages to serve files as-is |
-| `tests/engine.test.js` | Unit tests (optional). Run `node tests/engine.test.js` |
+| `engine_test.js` | Unit tests (optional). Run `node engine_test.js` |
 | `README.md` | This file |
 
 ## Publish
